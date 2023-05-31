@@ -61,9 +61,9 @@ function generateLandscapePDF() {
     doc.text(25, 100, "CPF/CNPJ: " + clientIdentification);
     doc.text(25, 110, "A importância de: R$" + clientServiceValue.value);
     doc.text(25, 120, "Referente à: " + clientDescription.value);
-    var year = clientDate.value[0,3];
-    var month = clientDate.value[5,6];
-    var day = clientDate.value[8,9];
+    var year = clientDate.value.slice(0,4);
+    var month = clientDate.value.slice(5,7);
+    var day = clientDate.value.slice(8,10);
     doc.text(25, 130, "Data do Recibo: " + day + "/" + month + "/" + year);
 
     // Text - Address and Contact
