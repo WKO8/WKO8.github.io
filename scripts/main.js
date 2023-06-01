@@ -177,10 +177,6 @@ String.prototype.extenso = function(c){
     return r.join(e);
 }
 
-
-console.log('153'.extenso().toUpperCase());
-
-
 var form = document.getElementById('clientForm');
 
 form.addEventListener('submit', function(e) {
