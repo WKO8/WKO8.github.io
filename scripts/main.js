@@ -1,23 +1,18 @@
 function generateLandscapePDF() {
 
-    const clientIdentification = "000.000.000-00";
-
     var clientName = document.getElementById('clientName');
-    var clientLastname = document.getElementById('clientLastname');
     var clientCPF = document.getElementById('clientCPF');
     var clientDate = document.getElementById('clientDate');
     var clientDescription = document.getElementById('clientDescription');
     var clientServiceValue = document.getElementById('clientServiceValue');
 
-    const serverName = "Lucas Moreira";
-    const serverCPF = "100.000.000-00";
-    const serverProfession = "Psicólogo";
-    const serverCRP = "0460000";
+    const serverName = "Lucas Moreira Sorrentino";
+    const serverCPF = "133.415.336-13";
+    const serverProfession = "Psicólogo Clínico";
+    const serverCRP = "04/60827";
 
-    const street = "Rua Francisca Leão Correa";
-    const number = "540";
-    const state = "MG";
-    const phone = "(38) 11111-1111";
+    const address = "Av. Vicente Risola, 1507, Sala 4 - Santa Inês, Belo Horizonte (MG)";
+    const phone = "(31) 99776-4293";
 
     var doc = new jsPDF({
         orientation: 'l',
@@ -39,7 +34,7 @@ function generateLandscapePDF() {
     doc.setTextColor('1', '1', '1');
     doc.setFontSize(16);
     doc.setFontType("bold");
-    doc.text(235, 48, "R$ " + clientServiceValue.value);
+    doc.text(235, 49, "R$ " + clientServiceValue.value + ",00");
     doc.setTextColor('0', '0', '0');
 
     // Text - Server
@@ -58,10 +53,11 @@ function generateLandscapePDF() {
     // Text - Client
     doc.setFontSize(20);
     doc.setFontType("normal");
-    doc.text(25, 90, "Recebemos de: " + clientName.value +  " " + clientLastname.value);
+    doc.text(25, 90, "Recebemos de: " + clientName.value);
     doc.text(25, 100, "CPF/CNPJ: " + clientCPF.value);
-    doc.text(25, 110, "A importância de: R$" + clientServiceValue.value + " (" + clientServiceValue.value.extenso().toUpperCase() + " REAIS)");
-    doc.text(25, 120, "Referente à: " + clientDescription.value);
+    var valueInWords = clientServiceValue.value.extenso()[0].toUpperCase() + clientServiceValue.value.extenso().slice(1, clientServiceValue.value.extenso().length);
+    doc.text(25, 110, "A importância de: R$" + clientServiceValue.value +  ",00 (" + valueInWords + " reais)");
+    doc.text(25, 120, "Referente " + clientDescription.value);
     var year = clientDate.value.slice(0,4);
     var month = clientDate.value.slice(5,7);
     var day = clientDate.value.slice(8,10);
@@ -70,32 +66,28 @@ function generateLandscapePDF() {
     // Text - Address and Contact
     doc.setFontSize(16);
     doc.setFontType("thin");
-    doc.text(25, 192, street + " " + number + " " + state);
+    doc.text(25, 192, address);
     doc.text(25, 200, "Telefone: " + phone);
 
 
-    doc.save('a4.pdf')
+    doc.save(clientName.value.replaceAll(" ", "_") + "_" + day+ "_" + month+ "_" + year + ".pdf");
 }
 
 function generatePortraitPDF() {
     
-    const clientIdentification = "000.000.000-00";
-
     var clientName = document.getElementById('clientName');
-    var clientLastname = document.getElementById('clientLastname');
+    var clientCPF = document.getElementById('clientCPF');
     var clientDate = document.getElementById('clientDate');
     var clientDescription = document.getElementById('clientDescription');
     var clientServiceValue = document.getElementById('clientServiceValue');
 
-    const serverName = "Lucas Moreira";
-    const serverCPF = "100.000.000-00";
-    const serverProfession = "Psicólogo";
-    const serverCRP = "0460000";
+    const serverName = "Lucas Moreira Sorrentino";
+    const serverCPF = "133.415.336-13";
+    const serverProfession = "Psicólogo Clínico";
+    const serverCRP = "04/60827";
 
-    const street = "Rua Francisca Leão Correa";
-    const number = "540";
-    const state = "MG";
-    const phone = "(38) 11111-1111";
+    const address = "Av. Vicente Risola, 1507, Sala 4 - Santa Inês, Belo Horizonte (MG)";
+    const phone = "(31) 99776-4293";
 
     var doc = new jsPDF({
         orientation: 'p',
@@ -117,7 +109,7 @@ function generatePortraitPDF() {
     doc.setTextColor('1', '1', '1');
     doc.setFontSize(12);
     doc.setFontType("bold");
-    doc.text(162, 46.5, "R$ " + clientServiceValue.value);
+    doc.text(162, 46.5, "R$ " + clientServiceValue.value + ",00");
     doc.setTextColor('0', '0', '0');
 
     // Text - Server
@@ -136,16 +128,17 @@ function generatePortraitPDF() {
     // Text - Client
     doc.setFontSize(14);
     doc.setFontType("normal");
-    doc.text(25, 70, "Recebemos de: " + clientName.value +  " " + clientLastname.value);
-    doc.text(25, 75, "CPF/CNPJ: " + clientIdentification);
-    doc.text(25, 80, "A importância de: R$" + clientServiceValue.value);
-    doc.text(25, 85, "Referente à: " + clientDescription.value);
+    doc.text(25, 70, "Recebemos de: " + clientName.value);
+    doc.text(25, 75, "CPF/CNPJ: " + clientCPF.value);
+    var valueInWords = clientServiceValue.value.extenso()[0].toUpperCase() + clientServiceValue.value.extenso().slice(1, clientServiceValue.value.extenso().length);
+    doc.text(25, 80, "A importância de: R$" + clientServiceValue.value +  ",00 (" + valueInWords + " reais)");
+    doc.text(25, 85, "Referente " + clientDescription.value);
     doc.text(25, 90, "Data do Recibo: " + clientDate.value);
 
     // Text - Address and Contact
     doc.setFontSize(11);
     doc.setFontType("thin");
-    doc.text(25, 120, street + " " + number + " " + state);
+    doc.text(25, 120, address);
     doc.text(25, 125, "Telefone: " + phone);
 
 
