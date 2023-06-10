@@ -25,25 +25,25 @@
             <div class="box-info">
                 <div class="info-fullName">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="clientName" name="clientName" placeholder="John Miller" >
+                        <input type="text" class="form-control" id="clientName" name="clientName" placeholder="John Miller" required>
                         <label for="floatingInput" class="text-secondary">Nome completo</label>
                     </div>
                 </div>
                 <div class="info-cpf">
                     <div class="form-floating mb-3">
-                        <input type="text" name="cpf" class="form-control" id="clientCPF" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF no formato: 000.000.000-00" >
+                        <input type="text" name="cpf" class="form-control" id="clientCPF" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="Digite um CPF no formato: 000.000.000-00" required>
                         <label for="floatingInput" class="text-secondary">CPF</label>
                     </div>
                 </div>
                 <div class="info-date">
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="clientDate" placeholder="31/02/2043" >
+                        <input type="date" class="form-control" id="clientDate" placeholder="31/02/2043" required>
                         <label for="floatingInput" class="text-secondary">Data</label>
                     </div>
                 </div>
                 <div class="info-service-description">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="clientDescription" placeholder="Atendimento psicológico ao John Miller" >
+                        <input type="text" class="form-control" id="clientDescription" placeholder="Atendimento psicológico ao John Miller" required>
                         <label for="floatingInput" class="text-secondary">Descrição do serviço</label>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <div class="input-group form-floating mb-3">
                         <span class="input-group-text">R$</span>
                         <div class="form-floating">
-                            <input type="number" class="form-control input-group" id="clientServiceValue" placeholder="Miller" >
+                            <input type="number" class="form-control input-group" id="clientServiceValue" placeholder="Miller" required>
                             <label for="floatingInput" class="text-secondary">Valor do serviço</label>
                         </div>
                     </div>
