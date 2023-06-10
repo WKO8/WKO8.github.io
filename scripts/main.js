@@ -1,3 +1,8 @@
+import {base64Image} from '../assets/base64Image.js';
+
+var base64Timbrada = base64Image;
+
+
 function generateLandscapePDF() {
 
     var clientName = document.getElementById('clientName');
@@ -19,6 +24,9 @@ function generateLandscapePDF() {
         unit: 'mm',
         format: 'a4',
     });
+
+    // Background - Image
+    doc.addImage(base64Timbrada, 'PNG', 10, 10, 100, 100);
 
     //  Text - Recibo 
     doc.setFontSize(22);
@@ -86,8 +94,8 @@ function generatePortraitPDF() {
     const serverProfession = "Psicólogo Clínico";
     const serverCRP = "04/60827";
 
-    const address = "Av. Vicente Risola, 1507, Sala 4 - Santa Inês, Belo Horizonte (MG)";
-    const phone = "(31) 99776-4293";
+    // const address = "Av. Vicente Risola, 1507, Sala 4 - Santa Inês, Belo Horizonte (MG)";
+    // const phone = "(31) 99776-4293";
 
     var doc = new jsPDF({
         orientation: 'p',
@@ -95,55 +103,62 @@ function generatePortraitPDF() {
         format: 'a4',
     });
 
+    // Background - Image
+    doc.addImage(base64Timbrada, 'PNG', 0, -5, 210, 300);
+
     //  Text - Recibo 
     doc.setFontSize(15);
     doc.setFontStyle('bold');
-    doc.text(169, 37.5, "RECIBO");
+    doc.text(169, 81, "RECIBO");
 
     // Rect - Background of Service value
     doc.setFillColor('0', '0', '1');
-    doc.rect(154, 42, 35, 7, 'F');
+    doc.rect(154, 86, 35, 7, 'F');
     doc.setFillColor('0', '0', '0');
 
     // Text - Service value
     doc.setTextColor('1', '1', '1');
     doc.setFontSize(12);
     doc.setFontType("bold");
-    doc.text(162, 46.5, "R$ " + clientServiceValue.value + ",00");
+    doc.text(162, 90.5, "R$ " + clientServiceValue.value + ",00");
     doc.setTextColor('0', '0', '0');
 
     // Text - Server
     doc.setFontSize(11);
-    doc.setFontType("thin");
-    doc.text(30, 35, "Nome: " + serverName);
-    doc.text(30, 40, "CPF: " + serverCPF);
-    doc.text(30, 45, serverProfession);
-    doc.text(30, 50, "CRP: " + serverCRP);
+    doc.setFontType("normal");
+    doc.text(30, 80, "Nome: " + serverName);
+    doc.text(30, 85, "CPF: " + serverCPF);
+    doc.text(30, 90, serverProfession);
+    doc.text(30, 95, "CRP: " + serverCRP);
 
     // Rect - Server Detail
     doc.setFillColor('0', '0', '0');
-    doc.rect(25, 32, 0.6, 18, 'F');
+    doc.rect(25, 77.3, 0.6, 18, 'F');
     doc.setFillColor('0', '0', '0');
 
     // Text - Client
     doc.setFontSize(14);
     doc.setFontType("normal");
-    doc.text(25, 70, "Recebemos de: " + clientName.value);
-    doc.text(25, 75, "CPF/CNPJ: " + clientCPF.value);
+    doc.text(25, 148, "Recebemos de: " + clientName.value);
+    doc.text(25, 155, "CPF/CNPJ: " + clientCPF.value);
     var valueInWords = clientServiceValue.value.extenso()[0].toUpperCase() + clientServiceValue.value.extenso().slice(1, clientServiceValue.value.extenso().length);
-    doc.text(25, 80, "A importância de: R$" + clientServiceValue.value +  ",00 (" + valueInWords + " reais)");
-    doc.text(25, 85, "Referente " + clientDescription.value);
-    doc.text(25, 90, "Data do Recibo: " + clientDate.value);
+    doc.text(25, 162, "A importância de: R$" + clientServiceValue.value +  ",00 (" + valueInWords + " reais)");
+    doc.text(25, 169, "Referente " + clientDescription.value);
+    var year = clientDate.value.slice(0,4);
+    var month = clientDate.value.slice(5,7);
+    var day = clientDate.value.slice(8,10);
+    doc.text(25, 176, "Data do Recibo: " + day + "/" + month + "/" + year);
 
     // Text - Address and Contact
-    doc.setFontSize(11);
-    doc.setFontType("thin");
-    doc.text(25, 120, address);
-    doc.text(25, 125, "Telefone: " + phone);
+    // doc.setFontSize(11);
+    // doc.setFontType("thin");
+    // doc.text(25, 120, address);
+    // doc.text(25, 125, "Telefone: " + phone);
 
 
-    doc.save('a4.pdf')
+    doc.save(clientName.value.replaceAll(" ", "_") + "_" + day+ "_" + month+ "_" + year + ".pdf");
 }
+
 
 // Prototype function to transform int to string
 String.prototype.extenso = function(c){
@@ -170,11 +185,12 @@ String.prototype.extenso = function(c){
     return r.join(e);
 }
 
+
 var form = document.getElementById('clientForm');
 
 form.addEventListener('submit', function(e) {
 
-    generateLandscapePDF();
+    generatePortraitPDF();
 
     // impede o envio do form
     e.preventDefault();
