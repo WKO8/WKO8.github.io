@@ -109,7 +109,7 @@ function generatePortraitPDF() {
     //  Text - Recibo 
     doc.setFontSize(15);
     doc.setFontStyle('bold');
-    doc.text(169, 81, "RECIBO");
+    doc.text(161.5, 81, "RECIBO");
 
     // Rect - Background of Service value
     doc.setFillColor('0', '0', '1');
@@ -139,15 +139,38 @@ function generatePortraitPDF() {
     // Text - Client
     doc.setFontSize(14);
     doc.setFontType("normal");
-    doc.text(25, 148, "Recebemos de: " + clientName.value);
-    doc.text(25, 155, "CPF/CNPJ: " + clientCPF.value);
+    doc.text(25, 151, "Recebemos de: " + clientName.value);
+    doc.text(25, 158, "CPF/CNPJ: " + clientCPF.value);
     var valueInWords = clientServiceValue.value.extenso()[0].toUpperCase() + clientServiceValue.value.extenso().slice(1, clientServiceValue.value.extenso().length);
-    doc.text(25, 162, "A importância de: R$" + clientServiceValue.value +  ",00 (" + valueInWords + " reais)");
-    doc.text(25, 169, "Referente " + clientDescription.value);
+    doc.text(25, 165, "A importância de: R$" + clientServiceValue.value +  ",00 (" + valueInWords + " reais)");
+
+
+    // Description with Wrapping text
+
+    var line = 172 // Line height to start text at
+    var lineHeight = 7 // line height to increase at the start height
+    var leftMargin = 25
+    var wrapWidth = 135
+    var longString = clientDescription.value
+
+    var splitText = doc.splitTextToSize(longString, wrapWidth)
+
+    for (var i = 0, length = splitText.length; i < length; i++) {
+        if (i == 0) {
+            doc.text("Referente " + splitText[i], leftMargin, line)
+        } else {
+            doc.text(splitText[i], leftMargin, line)
+        }
+
+        line = lineHeight + line
+    }
+
+    // var splitText = doc.splitTextToSize(clientDescription.value, 30);
+    // doc.text(25, 169, "Referente " + splitText);
     var year = clientDate.value.slice(0,4);
     var month = clientDate.value.slice(5,7);
     var day = clientDate.value.slice(8,10);
-    doc.text(25, 176, "Data do Recibo: " + day + "/" + month + "/" + year);
+    doc.text(25, line, "Data do Recibo: " + day + "/" + month + "/" + year);
 
     // Text - Address and Contact
     // doc.setFontSize(11);
