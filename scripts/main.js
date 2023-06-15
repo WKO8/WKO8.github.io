@@ -2,7 +2,6 @@ import {base64Image} from '../assets/base64Image.js';
 
 var base64Timbrada = base64Image;
 
-
 function generateLandscapePDF() {
 
     var clientName = document.getElementById('clientName');
@@ -94,9 +93,6 @@ function generatePortraitPDF() {
     const serverProfession = "Psicólogo Clínico";
     const serverCRP = "04/60827";
 
-    // const address = "Av. Vicente Risola, 1507, Sala 4 - Santa Inês, Belo Horizonte (MG)";
-    // const phone = "(31) 99776-4293";
-
     var doc = new jsPDF({
         orientation: 'p',
         unit: 'mm',
@@ -165,23 +161,14 @@ function generatePortraitPDF() {
         line = lineHeight + line
     }
 
-    // var splitText = doc.splitTextToSize(clientDescription.value, 30);
-    // doc.text(25, 169, "Referente " + splitText);
     var year = clientDate.value.slice(0,4);
     var month = clientDate.value.slice(5,7);
     var day = clientDate.value.slice(8,10);
     doc.text(25, line, "Data do Recibo: " + day + "/" + month + "/" + year);
 
-    // Text - Address and Contact
-    // doc.setFontSize(11);
-    // doc.setFontType("thin");
-    // doc.text(25, 120, address);
-    // doc.text(25, 125, "Telefone: " + phone);
-
 
     doc.save(clientName.value.replaceAll(" ", "_") + "_" + day+ "_" + month+ "_" + year + ".pdf");
 }
-
 
 // Prototype function to transform int to string
 String.prototype.extenso = function(c){
@@ -208,13 +195,11 @@ String.prototype.extenso = function(c){
     return r.join(e);
 }
 
-
 var form = document.getElementById('clientForm');
 
 form.addEventListener('submit', function(e) {
 
     generatePortraitPDF();
 
-    // impede o envio do form
     e.preventDefault();
 });
