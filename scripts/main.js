@@ -1,6 +1,56 @@
+// Imports
 import {base64Image} from '../assets/base64Image.js';
 
+// ----------------------------------------------------------------
+
+/*
+ * ----------------------------------------------------------------
+ * Variables
+ * ----------------------------------------------------------------
+ */
+
+// Strings and Objects
 var base64Timbrada = base64Image;
+var obj = [];
+
+// GettersElements
+var form = document.getElementById('clientForm');
+var register = document.getElementById('buttonRegisterClient');
+var divCards = document.getElementById('box-cards');
+
+
+
+// Numbers
+var width = window.innerWidth;
+
+/*
+ * ----------------------------------------------------------------
+ *  Event Listeners
+ * ----------------------------------------------------------------
+ */
+onload = function() {
+    loadCards();
+};
+
+form.addEventListener('submit', function(e) {
+
+    generatePortraitPDF();
+
+    e.preventDefault();
+});
+
+register.addEventListener('click', function(e) {
+    window.location.assign('./pages/register.html');
+});
+
+
+
+/* ----------------------------------------------------------------
+ * Functions 
+ * ----------------------------------------------------------------
+ */ 
+
+// Generate Receipt PDF  
 
 function generateLandscapePDF() {
 
@@ -195,11 +245,32 @@ String.prototype.extenso = function(c){
     return r.join(e);
 }
 
-var form = document.getElementById('clientForm');
+// Load cards from localStorage
 
-form.addEventListener('submit', function(e) {
+function loadCards() {
+    if (localStorage.hasOwnProperty('clients')) {
+        obj = JSON.parse(localStorage.getItem('clients'));
 
-    generatePortraitPDF();
+        for (var i = 0; i < obj.length; i++) {
+            var divCardClient = document.createElement('div');
+    
+            divCardClient.innerHTML = `
+                <div class="card c-client my-3" id="card-client-${i}" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">${obj[i].responsibleName}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">${obj[i].clientName}</h6>
+                        <p class="card-text">${obj[i].clientDescription}</p>
+                        <button type="button" class="btn btn-primary" id="btn-useCard" value="${i}" onclick="useCard(this)">Usar</button>
+                        <button type="button" class="btn btn-danger" id="btn-deleteCard" value="${i}" onclick="deleteCard(this)">Deletar</button>
+                    </div>
+                </div>
+            `;
 
-    e.preventDefault();
-});
+            divCards.appendChild(divCardClient);
+        }
+    }
+
+    console.log("Loading cards...");
+    console.log(obj);
+}
+
