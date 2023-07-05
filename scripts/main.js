@@ -17,11 +17,10 @@ var obj = [];
 var form = document.getElementById('clientForm');
 var register = document.getElementById('buttonRegisterClient');
 var divCards = document.getElementById('box-cards');
-
-
+let clientCPF = document.getElementById('clientCPF');
 
 // Numbers
-var width = window.innerWidth;
+var lengthCPF = 0;
 
 /*
  * ----------------------------------------------------------------
@@ -43,7 +42,9 @@ register.addEventListener('click', function(e) {
     window.location.assign('./pages/register.html');
 });
 
-
+clientCPF.addEventListener('input', function(e) {
+    completeCPFPattern();
+});
 
 /* ----------------------------------------------------------------
  * Functions 
@@ -246,7 +247,6 @@ String.prototype.extenso = function(c){
 }
 
 // Load cards from localStorage
-
 function loadCards() {
     if (localStorage.hasOwnProperty('clients')) {
         obj = JSON.parse(localStorage.getItem('clients'));
@@ -274,3 +274,13 @@ function loadCards() {
     console.log(obj);
 }
 
+// Complete CPF with the . and -
+function completeCPFPattern() {
+    lengthCPF = clientCPF.length;
+
+    if (lengthCPF == 3 || lengthCPF == 7) {
+        clientCPF.value = clientCPF.value + ".";
+    } else if (lengthCPF == 11) {
+        clientCPF.value = clientCPF.value + "-";
+    }
+}

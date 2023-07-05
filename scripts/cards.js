@@ -53,6 +53,8 @@ function useCard(id) {
     clientName.value = obj[idCard].responsibleName;
     clientCPF.value = obj[idCard].responsibleCPF;
     clientServiceValue.value = obj[idCard].clientServiceValue;
+    clientDate.value = "";
+    clientDescription.value = "";
 }
 
 function deleteCard(id) {
