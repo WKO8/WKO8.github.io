@@ -12,6 +12,7 @@ import {base64Image} from '../assets/base64Image.js';
 // Strings and Objects
 var base64Timbrada = base64Image;
 var obj = [];
+var finalCPF = "";
 
 // GettersElements
 var form = document.getElementById('clientForm');
@@ -21,6 +22,8 @@ let clientCPF = document.getElementById('clientCPF');
 
 // Numbers
 var lengthCPF = 0;
+var countCPF = 0;
+var countPoints = 0;
 
 /*
  * ----------------------------------------------------------------
@@ -43,7 +46,28 @@ register.addEventListener('click', function(e) {
 });
 
 clientCPF.addEventListener('input', function(e) {
-    completeCPFPattern();
+    lengthCPF = clientCPF.value.length;
+
+    if (lengthCPF === 0) {
+        countCPF = -1;
+        countPoints = 0;
+    } else if (lengthCPF === 14) {
+        finalCPF = clientCPF.value;
+    } else if (lengthCPF > 14) {
+        clientCPF.value = finalCPF;
+    }
+
+    countCPF += 1;
+
+    if (countCPF === 3) {
+        if (countPoints === 2) {
+            clientCPF.value = clientCPF.value + "-";
+        } else {
+            clientCPF.value = clientCPF.value + ".";
+            countCPF = 0;
+            countPoints += 1;
+        }
+    }
 });
 
 /* ----------------------------------------------------------------
