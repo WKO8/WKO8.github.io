@@ -2,11 +2,8 @@ a {
     text-decoration: none;
 }
 
-#buttonBack {
-    display: flex;
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
+.navbar {
+    background-color: #C5B3E6;
 }
 
 .box-register-client {
