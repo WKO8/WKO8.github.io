@@ -5,21 +5,16 @@
  */
 
 // Strings and Objects
-let key = 'clients';
-var obj = [];
 
 // GettersElements
-let clientName = document.getElementById('clientName');
-let clientCPF = document.getElementById('clientCPF');
-let clientDate = document.getElementById('clientDate');
-let clientDescription = document.getElementById('clientDescription');
-let clientServiceValue = document.getElementById('clientServiceValue');
+const clientName = document.getElementById('clientName');
+const clientCPF = document.getElementById('clientCPF');
+const clientDescription = document.getElementById('clientDescription');
+const clientServiceValue = document.getElementById('clientServiceValue');
 
 // Numbers
 var idCard = 0;
-var year = clientDate.value.slice(0,4);
-var month = clientDate.value.slice(5,7);
-var day = clientDate.value.slice(8,10);
+
 
 /*
  * ----------------------------------------------------------------
@@ -27,28 +22,18 @@ var day = clientDate.value.slice(8,10);
  * ----------------------------------------------------------------
  */
 
-clientDate.addEventListener('change', function(e) {
-    completeClientDescription(e);
-});
-
 
 /* ----------------------------------------------------------------
  * Functions 
  * ----------------------------------------------------------------
  */
 
-function completeClientDescription() {
-    year = clientDate.value.slice(0,4);
-    month = clientDate.value.slice(5,7);
-    day = clientDate.value.slice(8,10);
-
-    clientDescription.value = obj[idCard].clientDescription + day + "/" + month + "/" + year + ".";
-}
-
+// Use cards from localstorage
 function useCard(id) {
+    console.log(id.value);
     idCard = id.value;
 
-    obj = JSON.parse(localStorage.getItem('clients'));
+    obj = JSON.parse(localStorage.getItem(key));
 
     clientName.value = obj[idCard].responsibleName;
     clientCPF.value = obj[idCard].responsibleCPF;

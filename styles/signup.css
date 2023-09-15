@@ -1,0 +1,125 @@
+:root {
+    --bg-dark: #242a2c;
+    --bg-light: #c2e6f7;
+    --bg-dark-gray: #252023;
+    --black: #000;
+    --white: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-light);
+}
+
+
+.logo {
+    position: absolute;
+    top: 2rem;
+    left: 5rem;
+}
+
+.box-main-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50vw;
+    height: 55vh;
+    max-height: 800px;
+    padding: 2rem;
+    margin-left: -25vw;
+    margin-top: -27.5vh;
+    border: 1px solid;
+    border-radius: 1rem;
+    border-color: #4c4a5015;
+    box-shadow: 5px 5px 100px 15px rgba(255, 255, 255, 0.1);
+
+    z-index: 100;
+}
+
+.box-main-info.dark {
+    background: var(--bg-dark-gray);
+}
+
+h2.title-header {
+    color: #495057;
+}
+
+h2.title-header.dark {
+    color: #fff;
+}
+
+h2.text-main-info, label.text-main-info {
+    color: var(--black);
+}
+
+h2.text-main-info.dark, label.text-main-info.dark {
+    color: var(--white);
+}
+
+#userForm {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-top: 1rem;
+}
+
+.specific-info {
+    width: 100%;
+}
+
+.login-info {
+    width: 100%;
+    padding-left: 2rem;
+}
+
+
+/* Media Queries */
+
+@media screen and (min-width: 1900px) {
+    /* .box-main-info {
+        width: 50vw;
+        height: 70vh;
+        margin-left: -25vw;
+        margin-top: -35vh;
+    } */
+}
+
+@media screen and (max-width: 1700px) {
+    .box-main-info {
+        width: 50vw;
+        height: 70vh;
+        margin-left: -25vw;
+        margin-top: -35vh;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .box-main-info {
+        width: 80vw;
+        height: 120vh;
+        margin-left: -40vw;
+        margin-top: -42vh;
+    }
+
+    #userForm {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        padding-top: 1rem;
+    }
+
+    .login-info {
+        width: 100%;
+        padding-left: 0;
+    }
+}
