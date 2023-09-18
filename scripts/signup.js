@@ -51,7 +51,7 @@ userForm.addEventListener("submit", function(e) {
 })
 
 btnSignIn.addEventListener("click", function(e) {
-    location.href = "../pages/signin.html";
+    location.href = "../index.html";
     e.preventDefault();
 })
 
@@ -207,7 +207,6 @@ function registerUser() {
 
     location.href = "./pages/signin.html";
 }
-
 
 function darkTheme() {
     document.body.classList.toggle('dark');

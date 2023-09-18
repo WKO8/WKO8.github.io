@@ -31,7 +31,7 @@ userForm.addEventListener("submit", function(e) {
 });
 
 btnSignUp.addEventListener("click", function(e) {
-    location.href = "../index.html";
+    location.href = "./pages/signup.html";
     e.preventDefault();
 })
 
