@@ -48,7 +48,7 @@ function signIn() {
         for (var i = 0; i < obj.length; i++) {
             if (userEmail.value == obj[i].userEmail) {
                 if (userPassword.value == obj[i].userPassword) {
-                    location.href = "issue-receipt.html";
+                    location.href = "./pages/issue-receipt.html";
                     sessionStorage.setItem("loggedIn", true);
                 } else {
                     console.log("Senha ou email incorreto.");

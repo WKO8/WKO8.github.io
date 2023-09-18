@@ -33,6 +33,10 @@ a {
     background: var(--bg-dark-gray);
 }
 
+#box-cards {
+    justify-content: center;
+}
+
 .card-body {
     background-color: var(--white);
 }
