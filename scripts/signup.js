@@ -205,7 +205,7 @@ function registerUser() {
     
     localStorage.setItem(key, JSON.stringify(obj));
 
-    location.href = "./pages/signin.html";
+    location.href = "../index.html";
 }
 
 function darkTheme() {
